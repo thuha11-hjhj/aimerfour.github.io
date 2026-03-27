@@ -1,237 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Now Playing 🎧</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ha Thu's Album 🎧</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f7e8ff, #fdfcff);
+            color: #5a4a6a;
+            padding: 20px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    transition: background 1s;
-    background: linear-gradient(135deg, #f7e8ff, #ffffff);
-    overflow-x: hidden;
-}
+        /* Hero Player - Chiếm trọn 2 cột */
+        .player {
+            grid-column: span 2;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(160, 102, 255, 0.1);
+        }
 
-/* particles */
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
+        .disc-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+        }
 
-/* layout */
-.container {
-    max-width: 900px;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
+        .disc {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #333 10%, #111 40%, #a066ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 8s linear infinite;
+            box-shadow: 0 0 30px rgba(160, 102, 255, 0.3);
+        }
 
-/* card */
-.card {
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(15px);
-    padding: 20px;
-    border-radius: 20px;
-    transition: 0.3s;
-}
+        .disc img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+        }
 
-.card:hover {
-    transform: translateY(-5px);
-}
+        /* Progress Bar */
+        .progress-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .bar {
+            height: 8px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .fill {
+            height: 100%;
+            width: 65%; /* Tượng trưng cho progress */
+            background: linear-gradient(90deg, #c084fc, #a066ff);
+        }
 
-/* player */
-.player {
-    grid-column: span 2;
-    text-align: center;
-}
+        /* Card Style - Biến mỗi mục thành 1 "Mini Album" */
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
 
-/* disc */
-.disc {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: auto;
-    background: radial-gradient(circle, #fff 20%, #d9b3ff 60%, #a066ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .card:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 30px rgba(192, 132, 252, 0.2);
+        }
 
-.spin {
-    animation: spin 5s linear infinite;
-}
+        /* Thumbnail ảnh cho từng mục */
+        .card-img {
+            width: 100%;
+            height: 150px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            transition: 0.5s;
+        }
 
-@keyframes spin {
-    from { transform: rotate(0); }
-    to { transform: rotate(360deg); }
-}
+        .card:hover .card-img {
+            filter: brightness(1.1);
+        }
 
-.disc img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
+        /* Chi tiết các item */
+        h2 {
+            font-size: 20px;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* button */
-button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    background: #c084fc;
-    color: white;
-    cursor: pointer;
-}
+        .track-item {
+            padding: 12px 15px;
+            background: #fdfaff;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            border-left: 4px solid transparent;
+            transition: 0.3s;
+            display: flex;
+            justify-content: space-between;
+        }
 
-/* list */
-.item {
-    padding: 10px;
-    border-radius: 10px;
-    background: #f9f3ff;
-    margin: 6px 0;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        .track-item:hover {
+            border-left-color: #c084fc;
+            background: #f5eaff;
+            padding-left: 20px;
+        }
 
-.item:hover {
-    background: #ecd9ff;
-    transform: translateX(5px);
-}
+        /* Animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-</style>
+        /* Layout so le cho thú vị */
+        .mt-large { margin-top: 40px; }
+
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .mt-large { margin-top: 0; }
+        }
+    </style>
 </head>
-
 <body>
-
-<canvas id="bg"></canvas>
 
 <div class="container">
 
-<div class="card player">
-    <div id="disc" class="disc spin">
-        <img id="cover" src="https://i.pinimg.com/736x/8e/5c/6a/8e5c6a4e6f3c5a6c0f3b4a3e3b2f8b2d.jpg">
+    <div class="card player">
+        <div class="disc-wrapper">
+            <div class="disc">
+                <img src="https://i.pinimg.com/736x/8e/5c/6a/8e5c6a4e6f3c5a6c0f3b4a3e3b2f8b2d.jpg" alt="Avatar">
+            </div>
+        </div>
+        <h1 style="margin: 10px 0 5px;">Now Playing: Ha Thu</h1>
+        <p style="opacity: 0.7; margin-bottom: 20px;">Album: Finance & Banking '26</p>
+        
+        <div class="progress-container">
+            <div class="bar"><div class="fill"></div></div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 5px;">
+                <span>02:45</span>
+                <span>04:00</span>
+            </div>
+        </div>
     </div>
 
-    <h2 id="title">My Life 🎧</h2>
-    <p id="desc">Just figuring things out</p>
+    <div class="card">
+        <img class="card-img" src="https://i.pinimg.com/736x/47/4e/d8/474ed88f33166d40026e6371d36a71e1.jpg" alt="About">
+        <h2><span>📁</span> Intro</h2>
+        <p style="font-size: 14px; line-height: 1.6;">
+            Finance & Banking student. Một người hướng nội đang cố gắng "debug" cuộc đời và cân bằng giữa những con số với sự sáng tạo. 
+        </p>
+    </div>
 
-    <button onclick="toggle()">Play / Pause</button>
-</div>
-
-<div class="card">
-    <h3>Playlist</h3>
-
-    <div class="item" onclick="changeTrack(0)">🎵 About Me</div>
-    <div class="item" onclick="changeTrack(1)">🎵 Skills</div>
-    <div class="item" onclick="changeTrack(2)">🎵 Projects</div>
-    <div class="item" onclick="changeTrack(3)">🎵 Contact</div>
-</div>
-
-<div class="card">
-    <h3>Now Showing</h3>
-    <p id="content">
-        Finance & Banking student. Still learning step by step.
-    </p>
-</div>
-
-</div>
-
-<script>
-
-/* tracks */
-const tracks = [
-{
-    title: "About Me 🌸",
-    desc: "a short intro",
-    content: "I'm a Finance student trying to understand money and life.",
-    color: "linear-gradient(135deg,#ffd6ec,#ffffff)",
-    img: "https://i.pinimg.com/736x/5f/0c/52/5f0c528ed6eab6c8fbe0b0a77a7bde0b.jpg"
-},
-{
-    title: "Skills 💼",
-    desc: "what I can do",
-    content: "Excel • SQL • Financial Analysis",
-    color: "linear-gradient(135deg,#e0ccff,#ffffff)",
-    img: "https://i.pinimg.com/736x/63/9f/7d/639f7d7b5d78b8b1c08b5a69b6c68f21.jpg"
-},
-{
-    title: "Projects 📊",
-    desc: "things I've done",
-    content: "Bond valuation & expense tracking",
-    color: "linear-gradient(135deg,#f3d9ff,#ffffff)",
-    img: "https://i.pinimg.com/736x/71/2f/92/712f92c56b2e40a6c0a28b84c4e67f2b.jpg"
-},
-{
-    title: "Contact 📬",
-    desc: "reach me",
-    content: "your@email.com",
-    color: "linear-gradient(135deg,#ffe4f0,#ffffff)",
-    img: "https://i.pinimg.com/736x/92/47/54/924754d47d0a6a3a8a4f54c16c3e6d3b.jpg"
-}
-];
-
-function changeTrack(i){
-    document.getElementById("title").innerText = tracks[i].title;
-    document.getElementById("desc").innerText = tracks[i].desc;
-    document.getElementById("content").innerText = tracks[i].content;
-    document.body.style.background = tracks[i].color;
-    document.getElementById("cover").src = tracks[i].img;
-}
-
-/* play pause */
-let playing = true;
-function toggle(){
-    const disc = document.getElementById("disc");
-    playing = !playing;
-    disc.classList.toggle("spin");
-}
-
-/* particles */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<60;i++){
-    particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*2,
-        d: Math.random()*1
-    });
-}
-
-function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="rgba(200,150,255,0.5)";
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-    });
-    update();
-}
-
-function update(){
-    particles.forEach(p=>{
-        p.y -= p.d;
-        if(p.y<0) p.y = canvas.height;
-    });
-}
-
-setInterval(draw,30);
-
-</script>
-
-</body>
-</html>
+    <div class="card mt-large">
+        <img class="card-img" src="https://i.pinimg.com/736x/0d/18/8a/0d188a6552e690f05f778393e506927d.jpg" alt="Skills">
+        <h2><span>⚡</span> Tech Stack</h2>
+        <div class="track-item">Advanced Excel <span>90%</span></div>
+        <div class="track-item">SQL / Database <span>75%</span></div>
+        <div
