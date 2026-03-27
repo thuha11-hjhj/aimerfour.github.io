@@ -8,6 +8,20 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
+    /* MÀN HÌNH CHỜ BẮT BUỘC CLICK */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(243, 232, 255, 0.9);
+      backdrop-filter: blur(20px);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1s ease, visibility 1s;
+    }
+
     body {
       background: linear-gradient(270deg, #f3e8ff, #e9d5ff, #f5f3ff, #ede9fe);
       background-size: 400% 400%;
@@ -31,119 +45,59 @@
       border-radius: 24px;
     }
 
-    .clickable {
-      transition: all 0.2s ease;
-    }
-    .clickable:active {
-      transform: scale(0.92);
-      filter: brightness(0.9);
-    }
-
-    .glow-text {
-      animation: glow 2s ease-in-out infinite alternate;
-    }
+    .clickable:active { transform: scale(0.92); filter: brightness(0.9); }
+    .glow-text { animation: glow 2s ease-in-out infinite alternate; }
 
     @keyframes glow {
       from {text-shadow: 0 0 5px #d8b4fe, 0 0 10px #c084fc;}
       to {text-shadow: 0 0 15px #e9d5ff, 0 0 25px #d8b4fe;}
     }
 
-    /* Hiệu ứng gấu dâu bay lơ lửng ở nền */
     .bg-bear {
-      position: fixed;
-      pointer-events: none;
-      z-index: -1;
-      font-size: 24px;
-      animation: floatUp 10s linear infinite;
-      opacity: 0.6;
+      position: fixed; pointer-events: none; z-index: -1; font-size: 24px;
+      animation: floatUp 10s linear infinite; opacity: 0.6;
     }
 
     @keyframes floatUp {
       0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
       10% { opacity: 0.6; }
-      90% { opacity: 0.6; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Hiệu ứng gấu dâu khi di chuột */
     .star {
-      position: fixed;
-      font-size: 22px;
-      pointer-events: none;
-      animation: fade 0.8s linear forwards;
-      z-index: 9999;
-      color: #a855f7;
+      position: fixed; font-size: 22px; pointer-events: none;
+      animation: fade 0.8s linear forwards; z-index: 9999; color: #a855f7;
     }
 
     @keyframes fade {
-      0% {opacity:1; transform: scale(1) rotate(0deg);}
-      100% {opacity:0; transform: scale(2) rotate(45deg);}
+      0% {opacity:1; transform: scale(1);}
+      100% {opacity:0; transform: scale(2);}
     }
 
-    /* Flip Card */
-    .flip-card {
-      background-color: transparent;
-      width: 280px;
-      height: 340px;
-      perspective: 1000px;
-    }
+    .flip-card { background-color: transparent; width: 280px; height: 340px; perspective: 1000px; }
+    .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-shadow: 0 8px 32px rgba(168, 85, 247, 0.1); }
+    .flip-card-front { background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.6); }
+    .flip-card-back { background: #f3e8ff; color: #7e22ce; transform: rotateY(180deg); border: 2px solid #e9d5ff; }
 
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-style: preserve-3d;
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      box-shadow: 0 8px 32px rgba(168, 85, 247, 0.1);
-    }
-
-    .flip-card-front {
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-    }
-
-    .flip-card-back {
-      background: #f3e8ff;
-      color: #7e22ce;
-      transform: rotateY(180deg);
-      border: 2px solid #e9d5ff;
-      text-align: center;
-    }
-
-    .skill-box {
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .skill-box:hover {
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 15px 30px rgba(168, 85, 247, 0.15);
-      border-color: #d8b4fe;
-    }
+    .skill-box:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.5); }
   </style>
 </head>
 
 <body class="text-gray-800 overflow-x-hidden">
 
-<div class="fixed inset-0 glass -z-10"></div>
+<div id="overlay">
+    <div class="text-center p-10 glass shadow-2xl">
+        <h2 class="text-4xl font-black text-purple-700 mb-6 uppercase tracking-widest">𐙚 Thu Ha 's World 🧸</h2>
+        <p class="mb-8 text-purple-900/70 font-medium italic">Vui lòng bật âm thanh để có trải nghiệm tốt nhất ✨</p>
+        <button onclick="startExperience()" class="bg-purple-600 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest shadow-lg hover:bg-purple-700 transition transform hover:scale-105">
+            Enter with Music 🎵
+        </button>
+    </div>
+</div>
 
+<div class="fixed inset-0 glass -z-10"></div>
 <div id="bear-container"></div>
 
 <header class="p-6 flex justify-between items-center glass sticky top-0 z-50">
@@ -168,7 +122,7 @@
         <div class="md:w-2/3">
             <h3 class="text-4xl font-black text-purple-700 mb-6 uppercase">about me</h3>
             <p class="text-xl leading-relaxed mb-4 italic text-purple-600/70">"Finance & Banking student"</p>
-            <p class="text-lg leading-relaxed text-gray-700">
+            <p class="text-lg leading-relaxed text-gray-700 font-medium">
                 I believe in the perfect balance between the precision of numbers and the beauty of daily life. I strive to bring a fresh, aesthetic perspective to everything I do.
             </p>
         </div>
@@ -177,130 +131,83 @@
 
 <section id="skills" class="py-24 text-center px-6">
   <h3 class="text-3xl font-black text-purple-700 mb-16 uppercase glow-text tracking-widest">Top Skills</h3>
-  <div class="grid grid-cols-2 md:grid-cols-6 gap-6 max-w-6xl mx-auto px-4">
-    <div class="glass p-8 skill-box clickable">
-        <i class="fa-solid fa-file-excel text-5xl text-green-500 mb-4"></i>
-        <p class="font-bold">Excel</p>
-    </div>
-    <div class="glass p-8 skill-box clickable">
-        <i class="fa-solid fa-microphone-lines text-5xl text-purple-500 mb-4"></i>
-        <p class="font-bold">Presenting</p>
-    </div>
-    <div class="glass p-8 skill-box clickable">
-        <i class="fa-solid fa-palette text-5xl text-pink-400 mb-4"></i>
-        <p class="font-bold">Design</p>
-    </div>
-    <div class="glass p-8 skill-box clickable">
-        <i class="fa-solid fa-database text-5xl text-orange-400 mb-4"></i>
-        <p class="font-bold">SQL</p>
-    </div>
-    <div class="glass p-8 skill-box clickable">
-        <i class="fa-solid fa-file-powerpoint text-5xl text-red-400 mb-4"></i>
-        <p class="font-bold">PowerPoint</p>
-    </div>
-    <div class="glass p-8 skill-box clickable">
-        <i class="fa-solid fa-file-word text-5xl text-blue-400 mb-4"></i>
-        <p class="font-bold">Word</p>
-    </div>
+  <div class="grid grid-cols-2 md:grid-cols-6 gap-6 max-w-6xl mx-auto px-4 font-bold">
+    <div class="glass p-8 skill-box clickable"><i class="fa-solid fa-file-excel text-5xl text-green-500 mb-4"></i><p>Excel</p></div>
+    <div class="glass p-8 skill-box clickable"><i class="fa-solid fa-microphone-lines text-5xl text-purple-500 mb-4"></i><p>Presenting</p></div>
+    <div class="glass p-8 skill-box clickable"><i class="fa-solid fa-palette text-5xl text-pink-400 mb-4"></i><p>Design</p></div>
+    <div class="glass p-8 skill-box clickable"><i class="fa-solid fa-database text-5xl text-orange-400 mb-4"></i><p>SQL</p></div>
+    <div class="glass p-8 skill-box clickable"><i class="fa-solid fa-file-powerpoint text-5xl text-red-400 mb-4"></i><p>PowerPoint</p></div>
+    <div class="glass p-8 skill-box clickable"><i class="fa-solid fa-file-word text-5xl text-blue-400 mb-4"></i><p>Word</p></div>
   </div>
 </section>
 
 <section id="interests" class="py-24 px-6">
     <h3 class="text-3xl font-black text-purple-700 mb-16 text-center uppercase glow-text tracking-widest">My Interests</h3>
-    <div class="flex flex-wrap justify-center gap-12 max-w-7xl mx-auto">
-        
+    <div class="flex flex-wrap justify-center gap-12 max-w-7xl mx-auto font-bold">
         <div class="flip-card clickable">
             <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="green-yuri-cd-cover.jpg" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Music">
-                    <h4 class="font-bold text-purple-800 uppercase">Music</h4>
-                </div>
-                <div class="flip-card-back p-6">
-                    <h4 class="text-xl font-bold mb-4">Melody 🎧</h4>
-                    <p class="text-sm italic mb-2">"Music is my escape."</p>
-                    <p class="text-xs font-bold text-purple-600 uppercase tracking-tighter">Rcm songs:</p>
-                    <p class="text-sm">Beautiful Life, Chroma Drift, Human Extinction, Hysteria,...</p>
-                </div>
+                <div class="flip-card-front"><img src="green-yuri-cd-cover.jpg" class="w-full h-4/5 object-cover rounded-xl mb-4"><h4 class="text-purple-800 uppercase">Music</h4></div>
+                <div class="flip-card-back p-6"><h4 class="text-xl mb-4 font-bold">Melody 🎧</h4><p class="text-xs font-bold text-purple-600 uppercase">Rcm songs:</p><p class="text-sm font-medium">Beautiful Life, Chroma Drift, Human Extinction, Hysteria,...</p></div>
             </div>
         </div>
-
         <div class="flip-card clickable">
             <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="꒰-♡-꒱-_-_꯭__꯭_꯭_-_-⌒-_.jpg" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Reading">
-                    <h4 class="font-bold text-purple-800 uppercase">Reading</h4>
-                </div>
-                <div class="flip-card-back p-6">
-                    <h4 class="text-xl font-bold mb-4">Bookshelf 📚</h4>
-                    <p class="text-sm italic mb-2">"Getting lost in pages."</p>
-                    <p class="text-xs font-bold text-purple-600 uppercase tracking-tighter">Rcm books:</p>
-                    <p class="text-sm">The Song of Achilles, Journey Under the Midnight Sun, The Little Prince,...</p>
-                </div>
+                <div class="flip-card-front"><img src="꒰-♡-꒱-_-_꯭__꯭_꯭_-_-⌒-_.jpg" class="w-full h-4/5 object-cover rounded-xl mb-4"><h4 class="text-purple-800 uppercase">Reading</h4></div>
+                <div class="flip-card-back p-6"><h4 class="text-xl mb-4 font-bold">Bookshelf 📚</h4><p class="text-xs font-bold text-purple-600 uppercase">Rcm books:</p><p class="text-sm font-medium">The Song of Achilles, Journey Under the Midnight Sun, The Little Prince,...</p></div>
             </div>
         </div>
-
         <div class="flip-card clickable">
             <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="tải-xuống.jpg" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Movie">
-                    <h4 class="font-bold text-purple-800 uppercase">Movie</h4>
-                </div>
-                <div class="flip-card-back p-6">
-                    <h4 class="text-xl font-bold mb-4">Cinema 🎬</h4>
-                    <p class="text-sm italic mb-2">"Aesthetic cinematography."</p>
-                    <p class="text-xs font-bold text-purple-600 uppercase tracking-tighter">Rcm movies:</p>
-                    <p class="text-sm">Breaking Bad, Interstellar, Coco,...</p>
-                </div>
+                <div class="flip-card-front"><img src="tải-xuống.jpg" class="w-full h-4/5 object-cover rounded-xl mb-4"><h4 class="text-purple-800 uppercase">Movie</h4></div>
+                <div class="flip-card-back p-6"><h4 class="text-xl mb-4 font-bold">Cinema 🎬</h4><p class="text-xs font-bold text-purple-600 uppercase">Rcm movies:</p><p class="text-sm font-medium">Breaking Bad, Interstellar, Coco,...</p></div>
             </div>
         </div>
-
     </div>
 </section>
 
 <footer class="p-16 text-center glass mt-24">
     <p class="font-bold tracking-widest text-purple-700 uppercase">✨ Thu Ha's Portfolio - 2026 ✨</p>
-    <div class="mt-8 space-x-10 text-3xl text-purple-900/50">
-        <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-facebook"></i></a>
-    </div>
 </footer>
 
-<button onclick="toggleMusic()" class="fixed bottom-10 right-10 bg-purple-600 text-white w-16 h-16 rounded-full shadow-2xl z-50 clickable flex items-center justify-center text-2xl hover:bg-purple-700 transition">
-  🎵
-</button>
-
-<audio id="bg-music" loop>
-  <source src="https://files.catbox.moe/x71v6g.mp3" type="audio/mpeg">
-</audio>
+<button onclick="toggleMusic()" class="fixed bottom-10 right-10 bg-purple-600 text-white w-16 h-16 rounded-full shadow-2xl z-50 clickable flex items-center justify-center text-2xl">🎵</button>
+<audio id="bg-music" loop><source src="https://files.catbox.moe/x71v6g.mp3" type="audio/mpeg"></audio>
 
 <script>
-// Hiệu ứng Typing
-const text = "Finance & Banking Student | 𐙚🧸";
-let i = 0;
-function typing() {
-  const target = document.getElementById("typing");
-  if(target) {
-    target.innerText = text.slice(0, i) + "|";
-    i++;
-    if (i <= text.length) setTimeout(typing, 50);
-  }
+// HÀM BẮT ĐẦU TRẢI NGHIỆM (Tắt overlay và bật nhạc)
+function startExperience() {
+    const music = document.getElementById("bg-music");
+    const overlay = document.getElementById("overlay");
+    
+    music.play().then(() => {
+        overlay.style.opacity = "0";
+        setTimeout(() => {
+            overlay.style.visibility = "hidden";
+        }, 1000);
+        typing(); // Bắt đầu gõ chữ khi vào trang
+    }).catch(error => {
+        console.log("Cần click trực tiếp để bật nhạc!");
+    });
 }
-typing();
 
-// Điều khiển nhạc
+function typing() {
+  const text = "Finance & Banking Student | 𐙚🧸";
+  let i = 0;
+  const target = document.getElementById("typing");
+  function run() {
+    if(target && i <= text.length) {
+      target.innerText = text.slice(0, i) + "|";
+      i++;
+      setTimeout(run, 50);
+    }
+  }
+  run();
+}
+
 function toggleMusic() {
   const music = document.getElementById("bg-music");
-  if (music.paused) music.play();
-  else music.pause();
+  music.paused ? music.play() : music.pause();
 }
 
-// Autoplay khi click lần đầu
-window.addEventListener("click", () => {
-  document.getElementById("bg-music").play();
-}, { once: true });
-
-// HIỆU ỨNG GẤU DÂU THEO CHUỘT
 window.addEventListener("mousemove", (e) => {
   const bear = document.createElement("div");
   bear.className = "star";
@@ -311,7 +218,6 @@ window.addEventListener("mousemove", (e) => {
   setTimeout(() => bear.remove(), 800);
 });
 
-// HIỆU ỨNG GẤU DÂU BAY NỀN
 function createBgBear() {
   const container = document.getElementById('bear-container');
   if(!container) return;
