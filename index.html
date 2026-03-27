@@ -3,57 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ha Thu | FTU Banking</title>
+    <title>Ha Thu Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #f8f0ff;
-            --primary: #a855f7;
-            --accent: #d8b4fe;
-            --text: #2e1065;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(216, 180, 254, 0.5) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.2) 0px, transparent 50%);
+            background: #fdfaff; /* Màu nền tím cực nhạt */
             font-family: 'Space Grotesk', sans-serif;
-            color: var(--text);
-            margin: 0;
-            padding: 40px 20px;
-            overflow-x: hidden;
+            color: #2e1065;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
         }
 
-        /* Container kiểu Bento Grid */
-        .bento-grid {
-            max-width: 1100px;
-            margin: 0 auto;
+        /* Container chính */
+        .wrapper {
+            max-width: 1000px;
+            width: 100%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: auto;
-            gap: 20px;
+            grid-auto-rows: minmax(150px, auto);
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .bento-item {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 32px;
-            padding: 24px;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Style chung cho các ô */
+        .box {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 24px;
+            padding: 25px;
+            transition: 0.4s ease;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.05);
         }
 
-        .bento-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
-            background: rgba(255, 255, 255, 0.9);
+        .box:hover {
+            transform: translateY(-5px);
+            border-color: #d8b4fe;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.1);
         }
 
-        /* Profile Card - To nhất */
-        .hero {
+        /* Ô Profile to nhất */
+        .profile {
             grid-column: span 2;
             grid-row: span 2;
             display: flex;
@@ -61,92 +54,72 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, #ffffff, #f3e8ff);
+            background: linear-gradient(135deg, #ffffff, #f5eaff);
         }
 
-        .avatar-ring {
-            width: 180px;
-            height: 180px;
+        .avatar {
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(45deg, var(--primary), #fff, var(--accent));
-            animation: rotate 10s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        .avatar-ring img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+            border: 3px solid #a855f7;
+            margin-bottom: 15px;
             object-fit: cover;
-            background: #fff;
-            animation: rotate-reverse 10s linear infinite;
         }
 
-        /* Stats Card - Nhìn như thông số chứng khoán */
+        /* Ô Stats (màu tím đậm làm điểm nhấn) */
         .stats {
             grid-column: span 2;
-            background: var(--primary);
+            background: #a855f7;
             color: white;
             display: flex;
             justify-content: space-around;
             align-items: center;
         }
 
-        .stat-box h3 { font-size: 28px; margin: 0; }
-        .stat-box p { font-size: 12px; opacity: 0.8; margin: 0; }
+        .stat-item h2 { font-size: 32px; }
+        .stat-item p { font-size: 12px; opacity: 0.9; }
 
-        /* Skills - Dạng nhãn dán trôi nổi */
+        /* Ô Ảnh nghệ thuật */
+        .image-box {
+            grid-column: span 1;
+            grid-row: span 2;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Ô Skills */
         .skills { grid-column: span 2; }
-        .tag-cloud {
+        .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-top: 10px;
         }
         .tag {
-            background: #fff;
-            padding: 8px 16px;
-            border-radius: 20px;
+            background: #f3e8ff;
+            color: #7e22ce;
+            padding: 6px 14px;
+            border-radius: 12px;
             font-size: 13px;
-            font-weight: 500;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            border: 1px solid #eee;
+            font-weight: 600;
         }
 
-        /* Project Card */
-        .project { grid-column: span 1; grid-row: span 2; }
-        .project-img {
-            width: 100%;
-            height: 250px;
-            border-radius: 20px;
-            object-fit: cover;
-            margin-bottom: 15px;
+        /* Ô Contact/Link */
+        .connect {
+            grid-column: span 1;
+            background: #2e1065;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* Mood Card */
-        .mood { grid-column: span 1; background: #e0e7ff; }
-
-        /* Animation */
-        @keyframes rotate { to { transform: rotate(360deg); } }
-        @keyframes rotate-reverse { to { transform: rotate(-360deg); } }
-
-        h1 { font-size: 32px; margin: 10px 0; letter-spacing: -1px; }
-        .ftu-badge {
-            background: rgba(168, 85, 247, 0.1);
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        /* Floating icons */
-        .float-icon {
-            position: absolute;
-            opacity: 0.1;
-            z-index: 0;
-            filter: grayscale(1);
-        }
-    </style>
+        /* Chữ nghĩa */
+        h1 { font-size: 28px; margin-bottom: 5px; }
+        .sub { color: #a855f
