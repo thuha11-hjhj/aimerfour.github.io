@@ -1,125 +1,237 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ha Thu Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            background: #fdfaff; /* Màu nền tím cực nhạt */
-            font-family: 'Space Grotesk', sans-serif;
-            color: #2e1065;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Now Playing 🎧</title>
 
-        /* Container chính */
-        .wrapper {
-            max-width: 1000px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(150px, auto);
-            gap: 15px;
-            margin-top: 20px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        /* Style chung cho các ô */
-        .box {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 24px;
-            padding: 25px;
-            transition: 0.4s ease;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.05);
-        }
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    transition: background 1s;
+    background: linear-gradient(135deg, #f7e8ff, #ffffff);
+    overflow-x: hidden;
+}
 
-        .box:hover {
-            transform: translateY(-5px);
-            border-color: #d8b4fe;
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.1);
-        }
+/* particles */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
 
-        /* Ô Profile to nhất */
-        .profile {
-            grid-column: span 2;
-            grid-row: span 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #ffffff, #f5eaff);
-        }
+/* layout */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        .avatar {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 3px solid #a855f7;
-            margin-bottom: 15px;
-            object-fit: cover;
-        }
+/* card */
+.card {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
 
-        /* Ô Stats (màu tím đậm làm điểm nhấn) */
-        .stats {
-            grid-column: span 2;
-            background: #a855f7;
-            color: white;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
+.card:hover {
+    transform: translateY(-5px);
+}
 
-        .stat-item h2 { font-size: 32px; }
-        .stat-item p { font-size: 12px; opacity: 0.9; }
+/* player */
+.player {
+    grid-column: span 2;
+    text-align: center;
+}
 
-        /* Ô Ảnh nghệ thuật */
-        .image-box {
-            grid-column: span 1;
-            grid-row: span 2;
-            padding: 0;
-            overflow: hidden;
-        }
+/* disc */
+.disc {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: auto;
+    background: radial-gradient(circle, #fff 20%, #d9b3ff 60%, #a066ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.spin {
+    animation: spin 5s linear infinite;
+}
 
-        /* Ô Skills */
-        .skills { grid-column: span 2; }
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .tag {
-            background: #f3e8ff;
-            color: #7e22ce;
-            padding: 6px 14px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-        }
+@keyframes spin {
+    from { transform: rotate(0); }
+    to { transform: rotate(360deg); }
+}
 
-        /* Ô Contact/Link */
-        .connect {
-            grid-column: span 1;
-            background: #2e1065;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.disc img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
 
-        /* Chữ nghĩa */
-        h1 { font-size: 28px; margin-bottom: 5px; }
-        .sub { color: #a855f
+/* button */
+button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background: #c084fc;
+    color: white;
+    cursor: pointer;
+}
+
+/* list */
+.item {
+    padding: 10px;
+    border-radius: 10px;
+    background: #f9f3ff;
+    margin: 6px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.item:hover {
+    background: #ecd9ff;
+    transform: translateX(5px);
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
+
+<div class="card player">
+    <div id="disc" class="disc spin">
+        <img id="cover" src="https://i.pinimg.com/736x/8e/5c/6a/8e5c6a4e6f3c5a6c0f3b4a3e3b2f8b2d.jpg">
+    </div>
+
+    <h2 id="title">My Life 🎧</h2>
+    <p id="desc">Just figuring things out</p>
+
+    <button onclick="toggle()">Play / Pause</button>
+</div>
+
+<div class="card">
+    <h3>Playlist</h3>
+
+    <div class="item" onclick="changeTrack(0)">🎵 About Me</div>
+    <div class="item" onclick="changeTrack(1)">🎵 Skills</div>
+    <div class="item" onclick="changeTrack(2)">🎵 Projects</div>
+    <div class="item" onclick="changeTrack(3)">🎵 Contact</div>
+</div>
+
+<div class="card">
+    <h3>Now Showing</h3>
+    <p id="content">
+        Finance & Banking student. Still learning step by step.
+    </p>
+</div>
+
+</div>
+
+<script>
+
+/* tracks */
+const tracks = [
+{
+    title: "About Me 🌸",
+    desc: "a short intro",
+    content: "I'm a Finance student trying to understand money and life.",
+    color: "linear-gradient(135deg,#ffd6ec,#ffffff)",
+    img: "https://i.pinimg.com/736x/5f/0c/52/5f0c528ed6eab6c8fbe0b0a77a7bde0b.jpg"
+},
+{
+    title: "Skills 💼",
+    desc: "what I can do",
+    content: "Excel • SQL • Financial Analysis",
+    color: "linear-gradient(135deg,#e0ccff,#ffffff)",
+    img: "https://i.pinimg.com/736x/63/9f/7d/639f7d7b5d78b8b1c08b5a69b6c68f21.jpg"
+},
+{
+    title: "Projects 📊",
+    desc: "things I've done",
+    content: "Bond valuation & expense tracking",
+    color: "linear-gradient(135deg,#f3d9ff,#ffffff)",
+    img: "https://i.pinimg.com/736x/71/2f/92/712f92c56b2e40a6c0a28b84c4e67f2b.jpg"
+},
+{
+    title: "Contact 📬",
+    desc: "reach me",
+    content: "your@email.com",
+    color: "linear-gradient(135deg,#ffe4f0,#ffffff)",
+    img: "https://i.pinimg.com/736x/92/47/54/924754d47d0a6a3a8a4f54c16c3e6d3b.jpg"
+}
+];
+
+function changeTrack(i){
+    document.getElementById("title").innerText = tracks[i].title;
+    document.getElementById("desc").innerText = tracks[i].desc;
+    document.getElementById("content").innerText = tracks[i].content;
+    document.body.style.background = tracks[i].color;
+    document.getElementById("cover").src = tracks[i].img;
+}
+
+/* play pause */
+let playing = true;
+function toggle(){
+    const disc = document.getElementById("disc");
+    playing = !playing;
+    disc.classList.toggle("spin");
+}
+
+/* particles */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<60;i++){
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2,
+        d: Math.random()*1
+    });
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="rgba(200,150,255,0.5)";
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+    });
+    update();
+}
+
+function update(){
+    particles.forEach(p=>{
+        p.y -= p.d;
+        if(p.y<0) p.y = canvas.height;
+    });
+}
+
+setInterval(draw,30);
+
+</script>
+
+</body>
+</html>
