@@ -6,134 +6,85 @@
   <title>Thu Hà Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
   <style>
     body {
-      background: linear-gradient(-45deg, #e9d5ff, #ffffff, #d8b4fe);
-      background-size: 400% 400%;
-      animation: gradient 10s ease infinite;
+      background: linear-gradient(270deg, #c084fc, #e9d5ff, #ffffff, #d8b4fe);
+      background-size: 800% 800%;
+      animation: gradientMove 15s ease infinite;
+      cursor: none;
     }
-    @keyframes gradient {
-      0% {background-position: 0% 50%}
-      50% {background-position: 100% 50%}
-      100% {background-position: 0% 50%}
+
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
-    .particle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: #a855f7;
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: float 6s infinite ease-in-out;
+
+    .glass {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
     }
-    @keyframes float {
-      0% {transform: translateY(0)}
-      50% {transform: translateY(-20px)}
-      100% {transform: translateY(0)}
+
+    .glow-text {
+      animation: glow 2s ease-in-out infinite alternate;
     }
-    .avatar-glow {
-      box-shadow: 0 0 40px rgba(168,85,247,0.8);
+
+    @keyframes glow {
+      from {text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7;}
+      to {text-shadow: 0 0 20px #c084fc, 0 0 30px #c084fc;}
     }
-    .heart {
+
+    .star {
       position: fixed;
-      font-size: 16px;
-      color: #a855f7;
-      animation: floatUp 0.8s ease-out forwards;
+      font-size: 14px;
       pointer-events: none;
+      animation: fade 0.8s linear forwards;
     }
-    @keyframes floatUp {
-      0% {opacity:1; transform: translateY(0) scale(1);}
-      100% {opacity:0; transform: translateY(-40px) scale(1.5);}
+
+    @keyframes fade {
+      0% {opacity:1; transform: scale(1);}
+      100% {opacity:0; transform: scale(2);}
     }
   </style>
 </head>
+
 <body class="text-gray-800 overflow-x-hidden">
 
-<div id="particles"></div>
+<!-- glass layer -->
+<div class="fixed inset-0 glass -z-10"></div>
 
-<header class="p-6 flex justify-between bg-white/70 backdrop-blur-md sticky top-0">
-  <h1 class="text-2xl font-bold text-purple-600">Thu Hà</h1>
-  <nav class="space-x-6">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#interest">Interest</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header class="p-6 flex justify-between glass sticky top-0">
+  <h1 class="text-2xl font-bold text-purple-600 glow-text">Thu Hà</h1>
 </header>
 
 <section class="h-screen flex flex-col justify-center items-center text-center">
-  <img src="https://source.unsplash.com/200x200/?girl,face" class="rounded-full mb-4 avatar-glow" />
-  <h2 class="text-6xl font-extrabold text-purple-700 mb-4">Thu Hà ✨</h2>
+  <h2 class="text-6xl font-extrabold text-purple-700 mb-4 glow-text">Thu Hà ✨</h2>
   <p id="typing" class="text-lg"></p>
 </section>
 
-<section id="about" class="p-16 grid md:grid-cols-2 gap-10 items-center">
-  <img src="https://source.unsplash.com/500x500/?student" class="rounded-3xl shadow-xl" id="parallax" />
-  <div>
-    <h3 class="text-3xl font-bold text-purple-600 mb-4">About Me</h3>
-    <p>Sinh viên năm 2 ngành Tài chính - Ngân hàng tại FTU. Quan tâm đến phân tích dữ liệu, Excel và các ứng dụng thực tế trong tài chính.</p>
+<section class="p-16 text-center">
+  <h3 class="text-3xl font-bold text-purple-700 mb-6 glow-text">Skills</h3>
+  <div class="grid md:grid-cols-4 gap-6">
+    <div class="glass p-6">Excel</div>
+    <div class="glass p-6">Word</div>
+    <div class="glass p-6">SQL</div>
+    <div class="glass p-6">PowerPoint</div>
   </div>
 </section>
 
-<section id="projects" class="p-16 bg-purple-50">
-  <h3 class="text-3xl font-bold text-center text-purple-700 mb-10">Projects</h3>
-  <div class="grid md:grid-cols-2 gap-8" id="projects"></div>
-</section>
+<audio id="bg-music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+</audio>
 
-<section id="skills" class="p-16">
-  <h3 class="text-3xl font-bold text-center text-purple-700 mb-10">Skills</h3>
-  <div class="grid md:grid-cols-4 gap-6 text-center">
-    <div class="bg-white p-6 rounded-2xl shadow-lg">Excel</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg">Word</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg">SQL</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg">PowerPoint</div>
-  </div>
-</section>
-
-<section id="interest" class="p-16">
-  <h3 class="text-3xl font-bold text-center text-purple-700 mb-10">My Interests</h3>
-  <div class="grid md:grid-cols-3 gap-6 text-center">
-
-    <div class="bg-white p-4 rounded-2xl shadow-lg">
-      <img src="https://source.unsplash.com/300x200/?band" class="rounded-xl mb-3" />
-      🎧 Xdinary Heroes
-    </div>
-
-    <div class="bg-white p-4 rounded-2xl shadow-lg">
-      <img src="https://source.unsplash.com/300x200/?virtual,concert" class="rounded-xl mb-3" />
-      🎤 PLAVE
-    </div>
-
-    <div class="bg-white p-4 rounded-2xl shadow-lg">
-      <img src="https://source.unsplash.com/300x200/?music" class="rounded-xl mb-3" />
-      💜 Kpop & Music
-    </div>
-
-  </div>
-</section>
-
-<section id="contact" class="p-16 bg-purple-50 text-center">
-  <h3 class="text-3xl font-bold text-purple-700 mb-6">Contact Me</h3>
-  <a href="mailto:yourmail@gmail.com" class="inline-block px-6 py-3 bg-purple-600 text-white rounded-full shadow-lg hover:scale-105 transition mb-4">
-    Send Email 💌
-  </a>
-  <div class="flex justify-center gap-6 text-2xl mt-4">
-    <a href="#" class="text-purple-600 hover:scale-125 transition"><i class="fab fa-facebook"></i></a>
-    <a href="#" class="text-purple-600 hover:scale-125 transition"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="text-purple-600 hover:scale-125 transition"><i class="fab fa-github"></i></a>
-  </div>
-</section>
-
-<div id="modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center">
-  <div class="bg-white p-10 rounded-2xl max-w-lg w-full">
-    <h2 id="modalTitle" class="text-2xl font-bold mb-3"></h2>
-    <p id="modalDesc"></p>
-  </div>
-</div>
+<button onclick="toggleMusic()" class="fixed bottom-5 right-5 bg-purple-600 text-white px-4 py-2 rounded-full shadow-lg">
+  🎵
+</button>
 
 <script>
-const text = "Finance & Banking Student | Data & Analysis";
+// typing
+const text = "Finance & Banking Student | Aesthetic Lover";
 let i = 0;
 function typing() {
   document.getElementById("typing").innerText = text.slice(0, i) + "|";
@@ -142,52 +93,27 @@ function typing() {
 }
 typing();
 
-const container = document.getElementById("particles");
-for (let i = 0; i < 40; i++) {
-  const p = document.createElement("div");
-  p.className = "particle";
-  p.style.top = Math.random()*100 + "%";
-  p.style.left = Math.random()*100 + "%";
-  container.appendChild(p);
+// music toggle
+function toggleMusic() {
+  const music = document.getElementById("bg-music");
+  if (music.paused) music.play();
+  else music.pause();
 }
 
-// realistic projects
-const projects = [
-  {title: "Excel Sales Analysis", desc: "Phân tích doanh thu và chi phí bằng Excel (pivot table, chart)."},
-  {title: "Personal Finance Tracker", desc: "Theo dõi thu chi cá nhân, lập kế hoạch tiết kiệm."},
-  {title: "SQL Student Data", desc: "Truy vấn dữ liệu sinh viên và phân tích đơn giản bằng SQL."},
-  {title: "Market Research Report", desc: "Viết báo cáo nghiên cứu thị trường cơ bản cho môn học."}
-];
+// autoplay after click
+window.addEventListener("click", () => {
+  document.getElementById("bg-music").play();
+}, { once: true });
 
-const projectDiv = document.getElementById("projects");
-projects.forEach((p)=>{
-  const div = document.createElement("div");
-  div.className = "bg-white p-4 rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition";
-  div.innerHTML = `<h4 class='font-semibold text-lg'>${p.title}</h4><p class='text-sm text-gray-600 mt-2'>${p.desc}</p>`;
-  div.onclick = () => {
-    document.getElementById("modal").classList.remove("hidden");
-    document.getElementById("modalTitle").innerText = p.title;
-    document.getElementById("modalDesc").innerText = p.desc;
-  };
-  projectDiv.appendChild(div);
-});
-
-window.onclick = (e) => {
-  if (e.target.id === "modal") document.getElementById("modal").classList.add("hidden");
-};
-
-window.addEventListener("scroll", () => {
-  document.getElementById("parallax").style.transform = `translateY(${window.scrollY * 0.1}px)`;
-});
-
-window.addEventListener("click", (e) => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = "💜";
-  heart.style.left = e.clientX + "px";
-  heart.style.top = e.clientY + "px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),800);
+// star cursor
+window.addEventListener("mousemove", (e) => {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.innerText = "⭐";
+  star.style.left = e.clientX + "px";
+  star.style.top = e.clientY + "px";
+  document.body.appendChild(star);
+  setTimeout(()=>star.remove(),800);
 });
 </script>
 
