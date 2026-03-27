@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
-    /* MÀN HÌNH CHỜ TỐI GIẢN */
+    /* MÀN HÌNH CHỜ */
     #overlay {
       position: fixed;
       inset: 0;
@@ -52,13 +52,25 @@
       to {text-shadow: 0 0 15px #e9d5ff, 0 0 25px #d8b4fe;}
     }
 
+    /* FIX LẠI GẤU BAY NỀN */
+    #bear-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
     .bg-bear {
-      position: fixed; pointer-events: none; z-index: -1; font-size: 24px;
-      animation: floatUp 10s linear infinite; opacity: 0.6;
+      position: absolute;
+      pointer-events: none;
+      font-size: 24px;
+      animation: floatUp 10s linear infinite;
+      opacity: 0.6;
     }
 
     @keyframes floatUp {
       0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
@@ -95,6 +107,7 @@
 </div>
 
 <div class="fixed inset-0 glass -z-10"></div>
+
 <div id="bear-container"></div>
 
 <header class="p-6 flex justify-between items-center glass sticky top-0 z-50">
@@ -224,6 +237,7 @@ window.addEventListener("mousemove", (e) => {
   setTimeout(() => bear.remove(), 800);
 });
 
+// FIX LẠI HÀM TẠO GẤU BAY
 function createBgBear() {
   const container = document.getElementById('bear-container');
   if(!container) return;
@@ -231,6 +245,7 @@ function createBgBear() {
   bear.className = 'bg-bear';
   bear.innerText = Math.random() > 0.5 ? "𐙚" : "🧸";
   bear.style.left = Math.random() * 100 + "vw";
+  bear.style.top = "110vh"; // Bắt đầu từ dưới màn hình
   bear.style.animationDuration = (Math.random() * 5 + 7) + "s";
   container.appendChild(bear);
   setTimeout(() => bear.remove(), 10000);
