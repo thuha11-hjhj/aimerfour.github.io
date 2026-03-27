@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thu Hà 's Portfolio</title>
+  <title>Thu Hà 's Portfolio 𐙚🧸</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
@@ -14,6 +14,7 @@
       animation: gradientMove 15s ease infinite;
       cursor: none;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
     }
 
     @keyframes gradientMove {
@@ -47,9 +48,27 @@
       to {text-shadow: 0 0 15px #e9d5ff, 0 0 25px #d8b4fe;}
     }
 
+    /* Hiệu ứng gấu dâu bay lơ lửng ở nền */
+    .bg-bear {
+      position: fixed;
+      pointer-events: none;
+      z-index: -1;
+      font-size: 24px;
+      animation: floatUp 10s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Hiệu ứng gấu dâu khi di chuột */
     .star {
       position: fixed;
-      font-size: 18px;
+      font-size: 22px;
       pointer-events: none;
       animation: fade 0.8s linear forwards;
       z-index: 9999;
@@ -125,6 +144,8 @@
 
 <div class="fixed inset-0 glass -z-10"></div>
 
+<div id="bear-container"></div>
+
 <header class="p-6 flex justify-between items-center glass sticky top-0 z-50">
   <h1 class="text-2xl font-black text-purple-700 glow-text tracking-tighter">thu ha</h1>
   <nav class="space-x-8 hidden md:flex font-bold text-sm tracking-widest uppercase text-purple-900/70">
@@ -148,7 +169,7 @@
             <h3 class="text-4xl font-black text-purple-700 mb-6 uppercase">about me</h3>
             <p class="text-xl leading-relaxed mb-4 italic text-purple-600/70">"Finance & Banking student with a heart for aesthetics."</p>
             <p class="text-lg leading-relaxed text-gray-700">
-                I believe in the perfect balance between the precision of numbers and the beauty of daily life. I strive to bring a fresh, aesthetic perspective to the world of banking and everything I do.
+                I believe in the perfect balance between the precision of numbers and the beauty of daily life. I strive to bring a fresh, aesthetic perspective to everything I do.
             </p>
         </div>
     </div>
@@ -222,7 +243,7 @@
                 </div>
                 <div class="flip-card-back p-6">
                     <h4 class="text-xl font-bold mb-4">Cinema 🎬</h4>
-                    <p class="text-sm">Rcm.</p>
+                    <p class="text-sm">Aesthetic cinematography and meaningful stories are what I look for in every film.</p>
                 </div>
             </div>
         </div>
@@ -231,7 +252,7 @@
 </section>
 
 <footer class="p-16 text-center glass mt-24">
-    <p class="font-bold tracking-widest text-purple-700 uppercase">✨ Thu Ha's Portfolio - 2026 ✨</p>
+    <p class="font-bold tracking-widest text-purple-700 uppercase">✨ Stay Aesthetic - 2026 ✨</p>
     <div class="mt-8 space-x-10 text-3xl text-purple-900/50">
         <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-linkedin"></i></a>
@@ -248,7 +269,8 @@
 </audio>
 
 <script>
-const text = "Finance & Banking Student | Aesthetic Lover";
+// Hiệu ứng Typing
+const text = "Finance & Banking Student | Aesthetic Lover | 𐙚🧸";
 let i = 0;
 function typing() {
   const target = document.getElementById("typing");
@@ -260,25 +282,42 @@ function typing() {
 }
 typing();
 
+// Điều khiển nhạc
 function toggleMusic() {
   const music = document.getElementById("bg-music");
   if (music.paused) music.play();
   else music.pause();
 }
 
+// Autoplay khi click lần đầu
 window.addEventListener("click", () => {
   document.getElementById("bg-music").play();
 }, { once: true });
 
+// HIỆU ỨNG GẤU DÂU THEO CHUỘT
 window.addEventListener("mousemove", (e) => {
-  const star = document.createElement("div");
-  star.className = "star";
-  star.innerText = "✨"; 
-  star.style.left = e.clientX + "px";
-  star.style.top = e.clientY + "px"; 
-  document.body.appendChild(star);
-  setTimeout(() => star.remove(), 800);
+  const bear = document.createElement("div");
+  bear.className = "star";
+  bear.innerText = "𐙚🧸"; 
+  bear.style.left = (e.clientX - 10) + "px";
+  bear.style.top = (e.clientY - 10) + "px"; 
+  document.body.appendChild(bear);
+  setTimeout(() => bear.remove(), 800);
 });
+
+// HIỆU ỨNG GẤU DÂU BAY NỀN (Tự động)
+function createBgBear() {
+  const container = document.getElementById('bear-container');
+  if(!container) return;
+  const bear = document.createElement('div');
+  bear.className = 'bg-bear';
+  bear.innerText = Math.random() > 0.5 ? "𐙚" : "🧸";
+  bear.style.left = Math.random() * 100 + "vw";
+  bear.style.animationDuration = (Math.random() * 5 + 7) + "s";
+  container.appendChild(bear);
+  setTimeout(() => bear.remove(), 10000);
+}
+setInterval(createBgBear, 1500);
 </script>
 
 </body>
