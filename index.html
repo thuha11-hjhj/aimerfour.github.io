@@ -1,190 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ha Thu's Album 🎧</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Ha Thu | FTU Banking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #f8f0ff;
+            --primary: #a855f7;
+            --accent: #d8b4fe;
+            --text: #2e1065;
+        }
+
         body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(216, 180, 254, 0.5) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.2) 0px, transparent 50%);
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text);
             margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f7e8ff, #fdfcff);
-            color: #5a4a6a;
-            padding: 20px;
+            padding: 40px 20px;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
+        /* Container kiểu Bento Grid */
+        .bento-grid {
+            max-width: 1100px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto;
+            gap: 20px;
         }
 
-        /* Hero Player - Chiếm trọn 2 cột */
-        .player {
-            grid-column: span 2;
+        .bento-item {
             background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(160, 102, 255, 0.1);
-        }
-
-        .disc-wrapper {
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 32px;
+            padding: 24px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 20px;
-        }
-
-        .disc {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle, #333 10%, #111 40%, #a066ff 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: spin 8s linear infinite;
-            box-shadow: 0 0 30px rgba(160, 102, 255, 0.3);
-        }
-
-        .disc img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 4px solid #fff;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            width: 80%;
-            margin: 20px auto;
-        }
-        .bar {
-            height: 8px;
-            background: #eee;
-            border-radius: 10px;
             overflow: hidden;
         }
-        .fill {
-            height: 100%;
-            width: 65%; /* Tượng trưng cho progress */
-            background: linear-gradient(90deg, #c084fc, #a066ff);
+
+        .bento-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
+            background: rgba(255, 255, 255, 0.9);
         }
 
-        /* Card Style - Biến mỗi mục thành 1 "Mini Album" */
-        .card {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 25px;
-            padding: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.5);
-            overflow: hidden;
+        /* Profile Card - To nhất */
+        .hero {
+            grid-column: span 2;
+            grid-row: span 2;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #f3e8ff);
         }
 
-        .card:hover {
-            transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 15px 30px rgba(192, 132, 252, 0.2);
+        .avatar-ring {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--primary), #fff, var(--accent));
+            animation: rotate 10s linear infinite;
+            margin-bottom: 20px;
         }
 
-        /* Thumbnail ảnh cho từng mục */
-        .card-img {
+        .avatar-ring img {
             width: 100%;
-            height: 150px;
-            border-radius: 15px;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #fff;
+            animation: rotate-reverse 10s linear infinite;
+        }
+
+        /* Stats Card - Nhìn như thông số chứng khoán */
+        .stats {
+            grid-column: span 2;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .stat-box h3 { font-size: 28px; margin: 0; }
+        .stat-box p { font-size: 12px; opacity: 0.8; margin: 0; }
+
+        /* Skills - Dạng nhãn dán trôi nổi */
+        .skills { grid-column: span 2; }
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .tag {
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+        }
+
+        /* Project Card */
+        .project { grid-column: span 1; grid-row: span 2; }
+        .project-img {
+            width: 100%;
+            height: 250px;
+            border-radius: 20px;
             object-fit: cover;
             margin-bottom: 15px;
-            transition: 0.5s;
         }
 
-        .card:hover .card-img {
-            filter: brightness(1.1);
-        }
-
-        /* Chi tiết các item */
-        h2 {
-            font-size: 20px;
-            margin: 0 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .track-item {
-            padding: 12px 15px;
-            background: #fdfaff;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            font-size: 14px;
-            border-left: 4px solid transparent;
-            transition: 0.3s;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .track-item:hover {
-            border-left-color: #c084fc;
-            background: #f5eaff;
-            padding-left: 20px;
-        }
+        /* Mood Card */
+        .mood { grid-column: span 1; background: #e0e7ff; }
 
         /* Animation */
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes rotate { to { transform: rotate(360deg); } }
+        @keyframes rotate-reverse { to { transform: rotate(-360deg); } }
+
+        h1 { font-size: 32px; margin: 10px 0; letter-spacing: -1px; }
+        .ftu-badge {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        /* Layout so le cho thú vị */
-        .mt-large { margin-top: 40px; }
-
-        @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; }
-            .mt-large { margin-top: 0; }
+        /* Floating icons */
+        .float-icon {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+            filter: grayscale(1);
         }
     </style>
-</head>
-<body>
-
-<div class="container">
-
-    <div class="card player">
-        <div class="disc-wrapper">
-            <div class="disc">
-                <img src="https://i.pinimg.com/736x/8e/5c/6a/8e5c6a4e6f3c5a6c0f3b4a3e3b2f8b2d.jpg" alt="Avatar">
-            </div>
-        </div>
-        <h1 style="margin: 10px 0 5px;">Now Playing: Ha Thu</h1>
-        <p style="opacity: 0.7; margin-bottom: 20px;">Album: Finance & Banking '26</p>
-        
-        <div class="progress-container">
-            <div class="bar"><div class="fill"></div></div>
-            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 5px;">
-                <span>02:45</span>
-                <span>04:00</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card-img" src="https://i.pinimg.com/736x/47/4e/d8/474ed88f33166d40026e6371d36a71e1.jpg" alt="About">
-        <h2><span>📁</span> Intro</h2>
-        <p style="font-size: 14px; line-height: 1.6;">
-            Finance & Banking student. Một người hướng nội đang cố gắng "debug" cuộc đời và cân bằng giữa những con số với sự sáng tạo. 
-        </p>
-    </div>
-
-    <div class="card mt-large">
-        <img class="card-img" src="https://i.pinimg.com/736x/0d/18/8a/0d188a6552e690f05f778393e506927d.jpg" alt="Skills">
-        <h2><span>⚡</span> Tech Stack</h2>
-        <div class="track-item">Advanced Excel <span>90%</span></div>
-        <div class="track-item">SQL / Database <span>75%</span></div>
-        <div
