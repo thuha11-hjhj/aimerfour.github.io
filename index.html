@@ -72,7 +72,7 @@
   <img src="https://source.unsplash.com/500x500/?student" class="rounded-3xl shadow-xl" id="parallax" />
   <div>
     <h3 class="text-3xl font-bold text-purple-600 mb-4">About Me</h3>
-    <p>Sinh viên năm 2 ngành Tài chính - Ngân hàng tại FTU. Yêu thích phân tích dữ liệu, tài chính và thiết kế UI ✨</p>
+    <p>Sinh viên năm 2 ngành Tài chính - Ngân hàng tại FTU. Quan tâm đến phân tích dữ liệu, Excel và các ứng dụng thực tế trong tài chính.</p>
   </div>
 </section>
 
@@ -94,9 +94,22 @@
 <section id="interest" class="p-16">
   <h3 class="text-3xl font-bold text-center text-purple-700 mb-10">My Interests</h3>
   <div class="grid md:grid-cols-3 gap-6 text-center">
-    <div class="bg-white p-6 rounded-2xl shadow-lg">🎧 Xdinary Heroes</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg">🎤 PLAVE</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg">💜 Kpop & Music</div>
+
+    <div class="bg-white p-4 rounded-2xl shadow-lg">
+      <img src="https://source.unsplash.com/300x200/?band" class="rounded-xl mb-3" />
+      🎧 Xdinary Heroes
+    </div>
+
+    <div class="bg-white p-4 rounded-2xl shadow-lg">
+      <img src="https://source.unsplash.com/300x200/?virtual,concert" class="rounded-xl mb-3" />
+      🎤 PLAVE
+    </div>
+
+    <div class="bg-white p-4 rounded-2xl shadow-lg">
+      <img src="https://source.unsplash.com/300x200/?music" class="rounded-xl mb-3" />
+      💜 Kpop & Music
+    </div>
+
   </div>
 </section>
 
@@ -120,7 +133,7 @@
 </div>
 
 <script>
-const text = "Finance & Banking Student | Data & Analysis Lover";
+const text = "Finance & Banking Student | Data & Analysis";
 let i = 0;
 function typing() {
   document.getElementById("typing").innerText = text.slice(0, i) + "|";
@@ -129,7 +142,6 @@ function typing() {
 }
 typing();
 
-// particles
 const container = document.getElementById("particles");
 for (let i = 0; i < 40; i++) {
   const p = document.createElement("div");
@@ -139,16 +151,16 @@ for (let i = 0; i < 40; i++) {
   container.appendChild(p);
 }
 
-// projects data
+// realistic projects
 const projects = [
-  {title: "Financial Analysis Dashboard", desc: "Phân tích dữ liệu tài chính bằng Excel & trực quan hóa."},
-  {title: "Loan Risk Evaluation", desc: "Xây dựng mô hình đánh giá rủi ro tín dụng cơ bản."},
-  {title: "Personal Budget Tracker", desc: "Quản lý chi tiêu cá nhân bằng Excel."},
-  {title: "SQL Data Report", desc: "Truy vấn và phân tích dữ liệu bằng SQL."}
+  {title: "Excel Sales Analysis", desc: "Phân tích doanh thu và chi phí bằng Excel (pivot table, chart)."},
+  {title: "Personal Finance Tracker", desc: "Theo dõi thu chi cá nhân, lập kế hoạch tiết kiệm."},
+  {title: "SQL Student Data", desc: "Truy vấn dữ liệu sinh viên và phân tích đơn giản bằng SQL."},
+  {title: "Market Research Report", desc: "Viết báo cáo nghiên cứu thị trường cơ bản cho môn học."}
 ];
 
 const projectDiv = document.getElementById("projects");
-projects.forEach((p,i)=>{
+projects.forEach((p)=>{
   const div = document.createElement("div");
   div.className = "bg-white p-4 rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition";
   div.innerHTML = `<h4 class='font-semibold text-lg'>${p.title}</h4><p class='text-sm text-gray-600 mt-2'>${p.desc}</p>`;
@@ -164,12 +176,10 @@ window.onclick = (e) => {
   if (e.target.id === "modal") document.getElementById("modal").classList.add("hidden");
 };
 
-// parallax
 window.addEventListener("scroll", () => {
   document.getElementById("parallax").style.transform = `translateY(${window.scrollY * 0.1}px)`;
 });
 
-// heart effect
 window.addEventListener("click", (e) => {
   const heart = document.createElement("div");
   heart.className = "heart";
