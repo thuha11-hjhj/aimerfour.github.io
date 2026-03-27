@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(-45deg, #e9d5ff, #ffffff, #d8b4fe);
       background-size: 400% 400%;
       animation: gradient 10s ease infinite;
     }
-
     @keyframes gradient {
       0% {background-position: 0% 50%}
       50% {background-position: 100% 50%}
       100% {background-position: 0% 50%}
     }
-
     .particle {
       position: absolute;
       width: 6px;
@@ -27,46 +26,75 @@
       opacity: 0.3;
       animation: float 6s infinite ease-in-out;
     }
-
     @keyframes float {
       0% {transform: translateY(0)}
       50% {transform: translateY(-20px)}
       100% {transform: translateY(0)}
     }
+    .avatar-glow {
+      box-shadow: 0 0 30px rgba(168,85,247,0.6);
+    }
   </style>
 </head>
 <body class="text-gray-800 overflow-x-hidden">
 
-<!-- particles -->
 <div id="particles"></div>
 
-<!-- header -->
 <header class="p-6 flex justify-between bg-white/70 backdrop-blur-md sticky top-0">
   <h1 class="text-2xl font-bold text-purple-600">My Portfolio</h1>
+  <nav class="space-x-6">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#interest">Interest</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<!-- hero -->
 <section class="h-screen flex flex-col justify-center items-center text-center">
+  <img src="https://source.unsplash.com/200x200/?girl,face" class="rounded-full mb-4 avatar-glow" />
   <h2 class="text-5xl font-bold text-purple-700 mb-4">Hi, I'm You ✨</h2>
   <p id="typing" class="text-lg"></p>
 </section>
 
-<!-- about -->
-<section class="p-16 grid md:grid-cols-2 gap-10 items-center">
-  <img src="https://source.unsplash.com/500x500/?girl" class="rounded-3xl shadow-xl" id="parallax" />
+<section id="about" class="p-16 grid md:grid-cols-2 gap-10 items-center">
+  <img src="https://source.unsplash.com/500x500/?portrait" class="rounded-3xl shadow-xl" id="parallax" />
   <div>
     <h3 class="text-3xl font-bold text-purple-600 mb-4">About Me</h3>
     <p>I love aesthetic UI & animation ✨</p>
   </div>
 </section>
 
-<!-- projects -->
-<section class="p-16 bg-purple-50">
+<section id="projects" class="p-16 bg-purple-50">
+  <img src="https://source.unsplash.com/800x200/?technology" class="rounded-xl mb-6 w-full" />
   <h3 class="text-3xl font-bold text-center text-purple-700 mb-10">Projects</h3>
-  <div class="grid md:grid-cols-3 gap-8" id="projects"></div>
+  <div class="grid md:grid-cols-2 gap-8" id="projects"></div>
 </section>
 
-<!-- modal -->
+<section id="interest" class="p-16">
+  <img src="https://source.unsplash.com/800x200/?aesthetic" class="rounded-xl mb-6 w-full" />
+  <h3 class="text-3xl font-bold text-center text-purple-700 mb-10">My Interests</h3>
+  <div class="grid md:grid-cols-3 gap-6 text-center">
+    <div class="bg-white p-6 rounded-2xl shadow-lg">🎧 Music</div>
+    <div class="bg-white p-6 rounded-2xl shadow-lg">🎨 Design</div>
+    <div class="bg-white p-6 rounded-2xl shadow-lg">🎮 Gaming</div>
+  </div>
+</section>
+
+<section id="contact" class="p-16 bg-purple-50 text-center">
+  <img src="https://source.unsplash.com/800x200/?contact" class="rounded-xl mb-6 w-full" />
+  <h3 class="text-3xl font-bold text-purple-700 mb-6">Contact Me</h3>
+  
+  <a href="mailto:yourmail@gmail.com" class="inline-block px-6 py-3 bg-purple-600 text-white rounded-full shadow-lg hover:scale-105 transition mb-4">
+    Send Email 💌
+  </a>
+
+  <div class="flex justify-center gap-6 text-2xl mt-4">
+    <a href="#" class="text-purple-600 hover:scale-125 transition"><i class="fab fa-facebook"></i></a>
+    <a href="#" class="text-purple-600 hover:scale-125 transition"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="text-purple-600 hover:scale-125 transition"><i class="fab fa-github"></i></a>
+  </div>
+</section>
+
 <div id="modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center">
   <div class="bg-white p-10 rounded-2xl max-w-lg w-full">
     <img id="modalImg" class="rounded-xl mb-4" />
@@ -75,19 +103,7 @@
   </div>
 </div>
 
-<!-- skills -->
-<section class="p-16">
-  <h3 class="text-3xl font-bold text-center text-purple-700 mb-10">Skills</h3>
-  <div class="grid md:grid-cols-4 gap-6">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center">HTML</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center">CSS</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center">JS</div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center">React</div>
-  </div>
-</section>
-
 <script>
-// typing
 const text = "Creative Developer | UI Lover | Cool vibes";
 let i = 0;
 function typing() {
@@ -97,7 +113,6 @@ function typing() {
 }
 typing();
 
-// particles
 const container = document.getElementById("particles");
 for (let i = 0; i < 40; i++) {
   const p = document.createElement("div");
@@ -107,9 +122,8 @@ for (let i = 0; i < 40; i++) {
   container.appendChild(p);
 }
 
-// projects
 const projectDiv = document.getElementById("projects");
-for (let i = 1; i <= 6; i++) {
+for (let i = 1; i <= 4; i++) {
   const div = document.createElement("div");
   div.className = "bg-white p-4 rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition";
   div.innerHTML = `<img src="https://source.unsplash.com/300x200/?tech,${i}" class="rounded-xl mb-3"/><h4>Project ${i}</h4>`;
@@ -120,17 +134,14 @@ for (let i = 1; i <= 6; i++) {
   projectDiv.appendChild(div);
 }
 
-// close modal
 window.onclick = (e) => {
   if (e.target.id === "modal") document.getElementById("modal").classList.add("hidden");
 };
 
-// parallax
 window.addEventListener("scroll", () => {
   document.getElementById("parallax").style.transform = `translateY(${window.scrollY * 0.1}px)`;
 });
 
-// ripple
 window.addEventListener("click", (e) => {
   const ripple = document.createElement("div");
   ripple.style.position = "fixed";
