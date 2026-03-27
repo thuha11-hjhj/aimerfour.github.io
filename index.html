@@ -22,17 +22,16 @@
     }
 
     .glass {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 20px;
-      transition: all 0.3s ease;
     }
 
+    /* Hiệu ứng nổi khi ấn */
     .clickable:active {
-      transform: scale(0.95);
-      box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
+      transform: scale(0.9) !important;
     }
 
     .glow-text {
@@ -53,35 +52,66 @@
     }
 
     @keyframes fade {
-      0% {opacity:1; transform: scale(1) translateY(0);}
-      100% {opacity:0; transform: scale(2) translateY(-20px);}
+      0% {opacity:1; transform: scale(1);}
+      100% {opacity:0; transform: scale(2);}
     }
 
-    /* Interest Hover Effect */
-    .interest-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1.5rem;
-      width: 220px;
+    /* --- INTERESTS FLIP CARD EFFECT --- */
+    .flip-card {
+      background-color: transparent;
+      width: 240px;
+      height: 300px;
+      perspective: 1000px;
     }
-    
-    .interest-overlay {
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
       position: absolute;
-      inset: 0;
-      background: rgba(168, 85, 247, 0.85); /* Màu tím khi hover */
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 20px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
-      text-align: center;
-      color: white;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      border-radius: 0.75rem; /* Khớp với bo góc của ảnh bên trong */
+      padding: 20px;
     }
 
-    .interest-card:hover .interest-overlay {
-      opacity: 1;
+    .flip-card-front {
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .flip-card-back {
+      background: rgba(168, 85, 247, 0.9);
+      color: white;
+      transform: rotateY(180deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    /* --- SKILLS HOVER EFFECT --- */
+    .skill-box {
+      transition: all 0.4s ease;
+    }
+    .skill-box:hover {
+      transform: translateY(-10px) scale(1.05);
+      background: rgba(168, 85, 247, 0.2);
+      border-color: #a855f7;
+      box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
     }
   </style>
 </head>
@@ -92,121 +122,115 @@
 
 <header class="p-6 flex justify-between items-center glass sticky top-0 z-50">
   <h1 class="text-2xl font-bold text-purple-600 glow-text">Thu Hà</h1>
-  <nav class="space-x-6 hidden md:flex text-sm uppercase tracking-widest font-bold">
+  <nav class="space-x-8 hidden md:flex font-bold text-sm tracking-widest uppercase">
       <a href="#about" class="clickable hover:text-purple-600 transition">About</a>
-      <a href="#experience" class="clickable hover:text-purple-600 transition">Experience</a>
       <a href="#skills" class="clickable hover:text-purple-600 transition">Skills</a>
       <a href="#interests" class="clickable hover:text-purple-600 transition">Interests</a>
   </nav>
 </header>
 
 <section class="h-screen flex flex-col justify-center items-center text-center px-4">
-  <h2 class="text-7xl font-extrabold text-purple-700 mb-4 glow-text uppercase">Thu Hà ✨</h2>
-  <p id="typing" class="text-xl md:text-2xl font-medium text-purple-900/70 tracking-wide"></p>
+  <h2 class="text-7xl font-extrabold text-purple-700 mb-4 glow-text uppercase tracking-tighter">Thu Hà ✨</h2>
+  <p id="typing" class="text-xl md:text-2xl font-medium text-purple-900/60"></p>
 </section>
 
-<section id="about" class="py-20 px-6 max-w-5xl mx-auto">
-    <div class="glass p-10 md:flex items-center gap-12 shadow-xl">
-        <div class="md:w-1/3 mb-8 md:mb-0">
-            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=80" alt="Thu Hà" class="rounded-3xl shadow-2xl border-4 border-white/50 -rotate-2 hover:rotate-0 transition duration-500">
+<section id="about" class="py-24 px-6 max-w-5xl mx-auto">
+    <div class="glass p-10 md:flex items-center gap-12 shadow-2xl rounded-[40px]">
+        <div class="md:w-1/3 mb-10 md:mb-0">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Thu Hà" class="rounded-[30px] shadow-2xl border-8 border-white/30 rotate-2 hover:rotate-0 transition duration-700">
         </div>
         <div class="md:w-2/3">
-            <h3 class="text-4xl font-bold text-purple-700 mb-6">About Me</h3>
-            <p class="text-lg leading-relaxed mb-4 italic">"Sống rực rỡ như những đóa hoa."</p>
-            <p class="text-lg leading-relaxed">
-                Mình là Thu Hà, một sinh viên Tài chính luôn tìm kiếm sự cân bằng giữa những bảng tính Excel khô khan và tâm hồn nghệ thuật. Mình thích sự chỉn chu, mê mẩn những gì thuộc về "aesthetic" và luôn nỗ lực để mỗi ngày đều là một phiên bản tốt hơn.
+            <h3 class="text-4xl font-black text-purple-700 mb-6 uppercase">About Me</h3>
+            <p class="text-xl leading-relaxed mb-6 italic text-purple-600/80">"Finance girl with an aesthetic soul."</p>
+            <p class="text-lg leading-relaxed text-gray-700">
+                Chào m, m là Thu Hà. Một sinh viên Tài chính - Ngân hàng nỗ lực mang sự tinh tế vào mọi thứ m làm. M không chỉ làm việc với các con số, m làm việc với tâm thế của một người yêu cái đẹp.
             </p>
         </div>
     </div>
 </section>
 
-<section id="experience" class="py-20 px-6 max-w-4xl mx-auto">
-    <h3 class="text-3xl font-bold text-purple-700 mb-12 text-center glow-text">My Experience</h3>
-    <div class="space-y-8">
-        <div class="glass p-8 clickable relative overflow-hidden">
-            <span class="absolute top-0 right-0 bg-purple-600 text-white px-4 py-1 rounded-bl-xl text-sm">2026</span>
-            <h4 class="text-xl font-bold text-purple-800">Thực tập sinh Phân tích thị trường</h4>
-            <p class="text-purple-600 font-medium mb-2">Công ty ABC / Dự án Cá nhân</p>
-            <p class="text-gray-700">Thực hiện khảo sát và phân tích dữ liệu thị trường cho các thương hiệu dược phẩm và đồ thể thao hàng đầu.</p>
-        </div>
-        <div class="glass p-8 clickable border-l-4 border-purple-500">
-            <h4 class="text-xl font-bold text-purple-800">Sinh viên Tài chính - Ngân hàng</h4>
-            <p class="text-purple-600 font-medium mb-2">Đại học Kinh tế</p>
-            <p class="text-gray-700">Tập trung nghiên cứu về quản trị rủi ro, phân tích báo cáo tài chính và thị trường chứng khoán.</p>
-        </div>
+<section id="skills" class="py-24 text-center px-6">
+  <h3 class="text-3xl font-black text-purple-700 mb-16 uppercase glow-text">Top Skills</h3>
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-6xl mx-auto px-4">
+    <div class="glass p-8 skill-box clickable cursor-pointer">
+        <i class="fa-solid fa-file-excel text-5xl text-green-500 mb-4"></i>
+        <p class="font-bold text-lg">Excel</p>
     </div>
-</section>
-
-<section id="skills" class="py-20 text-center px-6">
-  <h3 class="text-3xl font-bold text-purple-700 mb-12 glow-text">Top Skills</h3>
-  <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto">
-    <div class="glass p-6 clickable hover:bg-white/40 shadow-md">
-        <i class="fa-solid fa-file-excel text-4xl text-green-600 mb-3"></i>
-        <p class="font-bold">Excel</p>
+    <div class="glass p-8 skill-box clickable cursor-pointer">
+        <i class="fa-solid fa-microphone-lines text-5xl text-purple-500 mb-4"></i>
+        <p class="font-bold text-lg">Presenting</p>
     </div>
-    <div class="glass p-6 clickable hover:bg-white/40 shadow-md">
-        <i class="fa-solid fa-microphone-lines text-4xl text-purple-600 mb-3"></i>
-        <p class="font-bold">Presenting</p>
+    <div class="glass p-8 skill-box clickable cursor-pointer">
+        <i class="fa-solid fa-database text-5xl text-orange-500 mb-4"></i>
+        <p class="font-bold text-lg">SQL</p>
     </div>
-    <div class="glass p-6 clickable hover:bg-white/40 shadow-md">
-        <i class="fa-solid fa-database text-4xl text-orange-600 mb-3"></i>
-        <p class="font-bold">SQL</p>
+    <div class="glass p-8 skill-box clickable cursor-pointer">
+        <i class="fa-solid fa-file-powerpoint text-5xl text-red-500 mb-4"></i>
+        <p class="font-bold text-lg">PowerPoint</p>
     </div>
-    <div class="glass p-6 clickable hover:bg-white/40 shadow-md">
-        <i class="fa-solid fa-file-powerpoint text-4xl text-red-600 mb-3"></i>
-        <p class="font-bold">PowerPoint</p>
-    </div>
-    <div class="glass p-6 clickable hover:bg-white/40 shadow-md">
-        <i class="fa-solid fa-file-word text-4xl text-blue-600 mb-3"></i>
-        <p class="font-bold">Word</p>
+    <div class="glass p-8 skill-box clickable cursor-pointer">
+        <i class="fa-solid fa-file-word text-5xl text-blue-500 mb-4"></i>
+        <p class="font-bold text-lg">Word</p>
     </div>
   </div>
 </section>
 
-<section id="interests" class="py-20 px-6">
-    <h3 class="text-3xl font-bold text-purple-700 mb-14 text-center glow-text">Interests</h3>
-    <div class="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto">
-        <div class="interest-card glass p-3 shadow-lg">
-            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=400&q=80" class="w-full aspect-square object-cover rounded-xl" alt="Travel">
-            <div class="interest-overlay">
-                <p class="text-sm font-medium">Mê xê dịch, thích khám phá những cung đường biển và ghi lại khoảnh khắc bình minh.</p>
+<section id="interests" class="py-24 px-6 bg-white/5">
+    <h3 class="text-3xl font-black text-purple-700 mb-16 text-center uppercase glow-text">My Interests</h3>
+    <div class="flex flex-wrap justify-center gap-12 max-w-7xl mx-auto">
+        
+        <div class="flip-card clickable">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4 shadow-md" alt="Travel">
+                    <h4 class="font-bold text-purple-800">DU LỊCH</h4>
+                </div>
+                <div class="flip-card-back">
+                    <h4 class="text-xl font-bold mb-4">Wanderlust ✈️</h4>
+                    <p class="text-sm leading-relaxed">Mê mẩn việc khám phá những vùng đất mới, đặc biệt là những bãi biển xanh ngắt và những quán cafe địa phương ẩn mình.</p>
+                </div>
             </div>
-            <p class="mt-4 font-bold text-purple-800 text-center">Du lịch</p>
         </div>
-        <div class="interest-card glass p-3 shadow-lg">
-            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" class="w-full aspect-square object-cover rounded-xl" alt="Music">
-            <div class="interest-overlay">
-                <p class="text-sm font-medium">Lofi & Jazz là "vibe" chân ái mỗi khi cần tập trung làm việc hay chill cuối tuần.</p>
+
+        <div class="flip-card clickable">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://images.unsplash.com/photo-1514525253361-b83f859b73c0?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4 shadow-md" alt="Music">
+                    <h4 class="font-bold text-purple-800">ÂM NHẠC</h4>
+                </div>
+                <div class="flip-card-back">
+                    <h4 class="text-xl font-bold mb-4">Melody 🎧</h4>
+                    <p class="text-sm leading-relaxed">Âm nhạc là liều thuốc cho tâm hồn m. Playlist yêu thích của m luôn có sự góp mặt của Lofi, Jazz và một chút Indie nhẹ nhàng.</p>
+                </div>
             </div>
-            <p class="mt-4 font-bold text-purple-800 text-center">Âm nhạc</p>
         </div>
-        <div class="interest-card glass p-3 shadow-lg">
-            <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=400&q=80" class="w-full aspect-square object-cover rounded-xl" alt="Photography">
-            <div class="interest-overlay">
-                <p class="text-sm font-medium">Thích bắt trọn những vẻ đẹp bình dị của cuộc sống qua ống kính máy ảnh.</p>
+
+        <div class="flip-card clickable">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4 shadow-md" alt="Coffee">
+                    <h4 class="font-bold text-purple-800">CÀ PHÊ</h4>
+                </div>
+                <div class="flip-card-back">
+                    <h4 class="text-xl font-bold mb-4">Cafeine ☕</h4>
+                    <p class="text-sm leading-relaxed">Thú vui lớn nhất là ngồi nhâm nhi một tách Latte đá trong một không gian tối giản, yên tĩnh để học bài hoặc đọc sách.</p>
+                </div>
             </div>
-            <p class="mt-4 font-bold text-purple-800 text-center">Nhiếp ảnh</p>
         </div>
-        <div class="interest-card glass p-3 shadow-lg">
-            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80" class="w-full aspect-square object-cover rounded-xl" alt="Coffee">
-            <div class="interest-overlay">
-                <p class="text-sm font-medium">Săn lùng những quán cafe tone trắng - tím xinh xắn để vừa học vừa check-in.</p>
-            </div>
-            <p class="mt-4 font-bold text-purple-800 text-center">Cà phê</p>
-        </div>
+
     </div>
 </section>
 
-<footer class="p-12 text-center glass mt-20">
-    <p class="font-medium">© 2026 Thu Hà - ✨ Keep it Simple, Keep it Aesthetic ✨</p>
-    <div class="mt-6 space-x-6 text-2xl">
-        <a href="#" class="clickable inline-block hover:text-purple-600 transition"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="clickable inline-block hover:text-purple-600 transition"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="#" class="clickable inline-block hover:text-purple-600 transition"><i class="fa-brands fa-facebook"></i></a>
+<footer class="p-16 text-center glass mt-24">
+    <p class="font-bold tracking-widest text-purple-700">STAY AESTHETIC - 2026</p>
+    <div class="mt-8 space-x-8 text-3xl">
+        <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-facebook"></i></a>
     </div>
 </footer>
 
-<button onclick="toggleMusic()" class="fixed bottom-8 right-8 bg-purple-600 text-white w-14 h-14 rounded-full shadow-2xl z-50 clickable flex items-center justify-center text-xl">
+<button onclick="toggleMusic()" class="fixed bottom-10 right-10 bg-purple-600 text-white w-16 h-16 rounded-full shadow-2xl z-50 clickable flex items-center justify-center text-2xl hover:bg-purple-700 transition">
   🎵
 </button>
 
@@ -237,7 +261,7 @@ window.addEventListener("click", () => {
 window.addEventListener("mousemove", (e) => {
   const star = document.createElement("div");
   star.className = "star";
-  star.innerText = "⭐";
+  star.innerText = "✨";
   star.style.left = e.clientX + "px";
   star.style.top = e.clientY + "px";
   document.body.appendChild(star);
