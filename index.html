@@ -83,8 +83,8 @@
     /* Flip Card */
     .flip-card {
       background-color: transparent;
-      width: 260px;
-      height: 320px;
+      width: 280px;
+      height: 340px;
       perspective: 1000px;
     }
 
@@ -217,7 +217,9 @@
                 </div>
                 <div class="flip-card-back p-6">
                     <h4 class="text-xl font-bold mb-4">Melody 🎧</h4>
-                    <p class="text-sm">Lofi and Jazz are my soulmates during late-night study sessions. Music is my escape.</p>
+                    <p class="text-sm italic mb-2">"Music is my escape."</p>
+                    <p class="text-xs font-bold text-purple-600 uppercase tracking-tighter">Rcm songs:</p>
+                    <p class="text-sm">Beautiful Life, Chroma Drift, Human Extinction, Hysteria,...</p>
                 </div>
             </div>
         </div>
@@ -230,7 +232,9 @@
                 </div>
                 <div class="flip-card-back p-6">
                     <h4 class="text-xl font-bold mb-4">Bookshelf 📚</h4>
-                    <p class="text-sm">Getting lost in pages helps me discover new worlds and broaden my perspective on life.</p>
+                    <p class="text-sm italic mb-2">"Getting lost in pages."</p>
+                    <p class="text-xs font-bold text-purple-600 uppercase tracking-tighter">Rcm books:</p>
+                    <p class="text-sm">The Song of Achilles, Journey Under the Midnight Sun, The Little Prince,...</p>
                 </div>
             </div>
         </div>
@@ -243,7 +247,9 @@
                 </div>
                 <div class="flip-card-back p-6">
                     <h4 class="text-xl font-bold mb-4">Cinema 🎬</h4>
-                    <p class="text-sm">Aesthetic cinematography and meaningful stories are what I look for in every film.</p>
+                    <p class="text-sm italic mb-2">"Aesthetic cinematography."</p>
+                    <p class="text-xs font-bold text-purple-600 uppercase tracking-tighter">Rcm movies:</p>
+                    <p class="text-sm">Breaking Bad, Interstellar, Coco,...</p>
                 </div>
             </div>
         </div>
@@ -298,14 +304,14 @@ window.addEventListener("click", () => {
 window.addEventListener("mousemove", (e) => {
   const bear = document.createElement("div");
   bear.className = "star";
-  bear.innerText = "𐙚🧸"; 
+  bear.innerText = "ʚɞ"; 
   bear.style.left = (e.clientX - 10) + "px";
   bear.style.top = (e.clientY - 10) + "px"; 
   document.body.appendChild(bear);
   setTimeout(() => bear.remove(), 800);
 });
 
-// HIỆU ỨNG GẤU DÂU BAY NỀN (Tự động)
+// HIỆU ỨNG GẤU DÂU BAY NỀN
 function createBgBear() {
   const container = document.getElementById('bear-container');
   if(!container) return;
