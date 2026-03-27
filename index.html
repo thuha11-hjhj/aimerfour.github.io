@@ -3,18 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thu Ha 's Portfolio</title>
+  <title>Thu Hà 's Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
     body {
-
       background: linear-gradient(270deg, #f3e8ff, #e9d5ff, #f5f3ff, #ede9fe);
       background-size: 400% 400%;
       animation: gradientMove 15s ease infinite;
-      
-      
       cursor: none;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
@@ -50,7 +47,6 @@
       to {text-shadow: 0 0 15px #e9d5ff, 0 0 25px #d8b4fe;}
     }
 
-    
     .star {
       position: fixed;
       font-size: 18px;
@@ -65,6 +61,7 @@
       100% {opacity:0; transform: scale(2) rotate(45deg);}
     }
 
+    /* Flip Card */
     .flip-card {
       background-color: transparent;
       width: 260px;
@@ -145,13 +142,13 @@
 <section id="about" class="py-24 px-6 max-w-5xl mx-auto">
     <div class="glass p-10 md:flex items-center gap-12 shadow-xl rounded-[40px] clickable">
         <div class="md:w-1/3 mb-8 md:mb-0">
-            <img src="z7664427065500_70162ccb3b9da9f37b0526f11e87a696.jpg">
+            <img src="z7664427065500_70162ccb3b9da9f37b0526f11e87a696.jpg" class="rounded-[30px] shadow-2xl border-8 border-white/40 -rotate-2 hover:rotate-0 transition duration-700 w-full object-cover">
         </div>
         <div class="md:w-2/3">
             <h3 class="text-4xl font-black text-purple-700 mb-6 uppercase">about me</h3>
-            <p class="text-xl leading-relaxed mb-4 italic text-purple-600/70">"finance and banking student."</p>
+            <p class="text-xl leading-relaxed mb-4 italic text-purple-600/70">"Finance & Banking student with a heart for aesthetics."</p>
             <p class="text-lg leading-relaxed text-gray-700">
-                Chào m, m là Thu Hà. Một sinh viên Tài chính - Ngân hàng luôn nỗ lực mang sự tinh tế vào mọi thứ m làm. M không chỉ làm việc với các con số, m làm việc với tâm thế của một người yêu cái đẹp.
+                I believe in the perfect balance between the precision of numbers and the beauty of daily life. I strive to bring a fresh, aesthetic perspective to the world of banking and everything I do.
             </p>
         </div>
     </div>
@@ -194,25 +191,12 @@
         <div class="flip-card clickable">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Travel">
-                    <h4 class="font-bold text-purple-800 uppercase">Du lịch</h4>
-                </div>
-                <div class="flip-card-back p-6">
-                    <h4 class="text-xl font-bold mb-4">Wanderlust ✈️</h4>
-                    <p class="text-sm">Mê mẩn việc khám phá những vùng đất mới, bắt trọn từng khoảnh khắc bình yên bên bờ biển.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="flip-card clickable">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
                     <img src="https://images.unsplash.com/photo-1514525253361-b83f859b73c0?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Music">
-                    <h4 class="font-bold text-purple-800 uppercase">Âm nhạc</h4>
+                    <h4 class="font-bold text-purple-800 uppercase">Music</h4>
                 </div>
                 <div class="flip-card-back p-6">
                     <h4 class="text-xl font-bold mb-4">Melody 🎧</h4>
-                    <p class="text-sm">Lofi và Jazz là người bạn đồng hành không thể thiếu trong mỗi buổi học khuya của m.</p>
+                    <p class="text-sm">Lofi and Jazz are my soulmates during late-night study sessions. Music is my escape.</p>
                 </div>
             </div>
         </div>
@@ -220,12 +204,25 @@
         <div class="flip-card clickable">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Coffee">
-                    <h4 class="font-bold text-purple-800 uppercase">Cà phê</h4>
+                    <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Reading">
+                    <h4 class="font-bold text-purple-800 uppercase">Reading</h4>
                 </div>
                 <div class="flip-card-back p-6">
-                    <h4 class="text-xl font-bold mb-4">Cafeine ☕</h4>
-                    <p class="text-sm">Một tách Latte đá trong không gian tối giản là công thức hoàn hảo cho sự sáng tạo.</p>
+                    <h4 class="text-xl font-bold mb-4">Bookshelf 📚</h4>
+                    <p class="text-sm">Getting lost in pages helps me discover new worlds and broaden my perspective on life.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card clickable">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" class="w-full h-4/5 object-cover rounded-xl mb-4" alt="Movie">
+                    <h4 class="font-bold text-purple-800 uppercase">Movie</h4>
+                </div>
+                <div class="flip-card-back p-6">
+                    <h4 class="text-xl font-bold mb-4">Cinema 🎬</h4>
+                    <p class="text-sm">Rcm.</p>
                 </div>
             </div>
         </div>
@@ -234,7 +231,7 @@
 </section>
 
 <footer class="p-16 text-center glass mt-24">
-    <p class="font-bold tracking-widest text-purple-700 uppercase">✨ Stay Aesthetic - 2026 ✨</p>
+    <p class="font-bold tracking-widest text-purple-700 uppercase">✨ Thu Ha's Portfolio - 2026 ✨</p>
     <div class="mt-8 space-x-10 text-3xl text-purple-900/50">
         <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" class="clickable inline-block hover:text-purple-600 transition hover:scale-125"><i class="fa-brands fa-linkedin"></i></a>
@@ -243,15 +240,14 @@
 </footer>
 
 <button onclick="toggleMusic()" class="fixed bottom-10 right-10 bg-purple-600 text-white w-16 h-16 rounded-full shadow-2xl z-50 clickable flex items-center justify-center text-2xl hover:bg-purple-700 transition">
-  🎵
+  🎵
 </button>
 
 <audio id="bg-music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Hiệu ứng Typing
 const text = "Finance & Banking Student | Aesthetic Lover";
 let i = 0;
 function typing() {
@@ -264,19 +260,16 @@ function typing() {
 }
 typing();
 
-// Điều khiển nhạc
 function toggleMusic() {
   const music = document.getElementById("bg-music");
   if (music.paused) music.play();
   else music.pause();
 }
 
-// Autoplay khi click lần đầu
 window.addEventListener("click", () => {
   document.getElementById("bg-music").play();
 }, { once: true });
 
-// HIỆU ỨNG NGÔI SAO (ĐÃ FIX)
 window.addEventListener("mousemove", (e) => {
   const star = document.createElement("div");
   star.className = "star";
